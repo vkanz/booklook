@@ -9,7 +9,7 @@ type
   TLogTemplates = class
   const
     ScanningStarted = 'Scanning started: "%s"';
-    Book = 'Book: "%s"';
+    Book = 'File: "%s"';
     FileName = 'File: "%s"';
     ExtNotFound = 'Unknown file extension "%s"';
     FileNotFound = 'Error: file "%s" not found';

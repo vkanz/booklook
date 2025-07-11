@@ -123,7 +123,7 @@ var
   UnzipFileName: string;
   PublicationInfo: TPublicationInfo;
 begin
-  Log.Info(TLogTemplates.Book, [TPath.GetFileNameWithoutExtension(AFileName)], LogTag);
+  Log.Info(TLogTemplates.Book, [TPath.GetFileName(AFileName)], LogTag);
 
   Result := ExtractContent(AFileName, UnzipFileName);
   if Result then
