@@ -41,6 +41,7 @@ begin
   inherited AfterConstruction;
   FDatabase := TDatabase.Create(Self);
   FLookBookEngine := TLookBookEngine.Create(FDatabase);
+
   Edit_Database.Text := FDatabase.DbFileName;
 end;
 
