@@ -15,24 +15,43 @@ object Database: TDatabase
   object FDQuery_CreateTables: TFDQuery
     Connection = FDConnection
     SQL.Strings = (
-      'create table book ('
-      '  file_name text,'
-      '  title text,'
-      '  language text,'
-      '  identifier text,'
-      '  creator text,'
-      '  contributor text,'
-      '  publisher text,'
-      '  subject text,'
-      '  description text,'
-      '  date text,'
-      '  type text,'
-      '  format text,'
-      '  source text,'
-      '  relation text,'
-      '  coverage text,'
-      '  right text'
-      '  );')
+      '-- collection DDL'
+      ''
+      'CREATE TABLE collection ('
+      #9'id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,'
+      #9'name TEXT NOT NULL,'
+      #9'created TEXT'
+      ', root_path TEXT);'
+      ''
+      'CREATE UNIQUE INDEX collection_name_IDX ON collection (name);'
+      ''
+      '-- book DDL'
+      ''
+      'CREATE TABLE book ('
+      #9'collection_id INTEGER NOT NULL,'
+      #9'file_name TEXT,'
+      #9'title TEXT,'
+      #9'"language" TEXT,'
+      #9'identifier TEXT,'
+      #9'creator TEXT,'
+      #9'contributor TEXT,'
+      #9'publisher TEXT,'
+      #9'subject TEXT,'
+      #9'description TEXT,'
+      #9'date TEXT,'
+      #9'"type" TEXT,'
+      #9'format TEXT,'
+      #9'"source" TEXT,'
+      #9'relation TEXT,'
+      #9'coverage TEXT,'
+      #9'"right" TEXT,'
+      
+        #9'CONSTRAINT book_collection_FK FOREIGN KEY (collection_id) REFER' +
+        'ENCES collection(id)'
+      ');'
+      ''
+      'CREATE INDEX book_collection_id_IDX ON book (collection_id);'
+      'CREATE INDEX book_file_name_IDX ON book (file_name);')
     Left = 224
     Top = 56
   end
@@ -40,18 +59,22 @@ object Database: TDatabase
     Connection = FDConnection
     SQL.Strings = (
       'insert into book'
-      '  (file_name,'
+      '  (collection_id, file_name,'
       '  title, language, identifier, creator, contributor,'
       '  publisher, subject, description, date, type,'
       '  format, source, relation, coverage, right)'
       'values'
-      '  (:file_name,'
+      '  (:collection_id, :file_name,'
       '  :title, :language, :identifier, :creator, :contributor,'
       '  :publisher, :subject, :description, :date, :type,'
       '  :format, :source, :relation, :coverage, :right);')
-    Left = 224
-    Top = 120
+    Left = 104
+    Top = 152
     ParamData = <
+      item
+        Name = 'COLLECTION_ID'
+        ParamType = ptInput
+      end
       item
         Name = 'FILE_NAME'
         FDDataType = dtWideString

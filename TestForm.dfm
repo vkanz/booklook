@@ -37,4 +37,12 @@ object Form14: TForm14
     ScrollBars = ssBoth
     TabOrder = 2
   end
+  object Edit_Database: TEdit
+    Left = 48
+    Top = 112
+    Width = 497
+    Height = 23
+    TabOrder = 3
+    Text = 'Database'
+  end
 end

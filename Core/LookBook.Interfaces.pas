@@ -5,11 +5,6 @@ interface
 uses LookBook.Common;
 
 type
-  ILogger = interface
-    procedure Log(const AMessage: string);
-  end;
-
-type
   IBookReader = interface
     function Inspect(const AFileName: string): Boolean;
   end;
@@ -17,6 +12,7 @@ type
 type
   IPublicationInfoConsumer = interface
     procedure AddPublicationInfo(const AFileName: string; const AInfo: TPublicationInfo);
+    procedure BeginUpdateCollection(const APath: string);
   end;
 
 type

@@ -11,10 +11,11 @@ uses
   LookBook.Common;
 
 type
-  TForm14 = class(TForm, ILogger, IPublicationInfoConsumer)
+  TForm14 = class(TForm)
     Edit1: TEdit;
     Button1: TButton;
     Memo1: TMemo;
+    Edit_Database: TEdit;
     procedure Button1Click(Sender: TObject);
   private
     FLookBookEngine: TLookBookEngine;
@@ -24,8 +25,6 @@ type
     procedure BeforeDestruction; override;
     { ILogger }
     procedure Log(const AMessage: string);
-    { IPublicationInfoConsumer }
-    procedure AddPublicationInfo(const AFileName: string; const AInfo: TPublicationInfo);
   end;
 
 var
@@ -35,18 +34,14 @@ implementation
 
 {$R *.dfm}
 
-uses IOUtils, System.Zip;
-
-procedure TForm14.AddPublicationInfo(const AFileName: string; const AInfo: TPublicationInfo);
-begin
-
-end;
+uses IOUtils;
 
 procedure TForm14.AfterConstruction;
 begin
   inherited AfterConstruction;
   FDatabase := TDatabase.Create(Self);
-  FLookBookEngine := TLookBookEngine.Create(Self, FDatabase);
+  FLookBookEngine := TLookBookEngine.Create(FDatabase);
+  Edit_Database.Text := FDatabase.DbFileName;
 end;
 
 procedure TForm14.BeforeDestruction;

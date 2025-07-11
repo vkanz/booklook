@@ -11,15 +11,12 @@ type
   private
     FReaders: TDictionary<string, IBookReader>;
     [weak]
-    FLogger: ILogger;
-    [weak]
     FPublicationInfoConsumer: IPublicationInfoConsumer;
     procedure CreateReaders;
   protected
-    procedure Log(const AFormat: string; const AArgs: array of const);
     procedure ProcessBook(const AFileName: string);
   public
-    constructor Create([weak]ALogger: ILogger; [weak]APublicationInfoConsumer: IPublicationInfoConsumer);
+    constructor Create([weak]APublicationInfoConsumer: IPublicationInfoConsumer);
     destructor Destroy; override;
     procedure ScanDirectory(const ADirectoryName: string);
   end;
@@ -28,15 +25,15 @@ implementation
 
 uses
   SysUtils, IOUtils,
+  LookBook.Logger,
   LookBook.Classes,
   LookBook.Epub,
   LookBook.Consts;
 
 { TLookBookEngine }
 
-constructor TLookBookEngine.Create([weak]ALogger: ILogger; [weak]APublicationInfoConsumer: IPublicationInfoConsumer);
+constructor TLookBookEngine.Create([weak]APublicationInfoConsumer: IPublicationInfoConsumer);
 begin
-  FLogger := ALogger;
   FPublicationInfoConsumer := APublicationInfoConsumer;
   FReaders := TDictionary<string, IBookReader>.Create;
   CreateReaders;
@@ -44,19 +41,13 @@ end;
 
 procedure TLookBookEngine.CreateReaders;
 begin
-  FReaders.Add(BookExtensions[TBookType.Epub], TEpubReader.Create(FLogger, FPublicationInfoConsumer));
+  FReaders.Add(BookExtensions[TBookType.Epub], TEpubReader.Create(FPublicationInfoConsumer));
 end;
 
 destructor TLookBookEngine.Destroy;
 begin
   FReaders.Free;
   inherited Destroy;
-end;
-
-procedure TLookBookEngine.Log(const AFormat: string; const AArgs: array of const);
-begin
-  Assert(Assigned(FLogger));
-  FLogger.Log(Format(AFormat, AArgs));
 end;
 
 procedure TLookBookEngine.ProcessBook(const AFileName: string);
@@ -67,7 +58,7 @@ begin
 
   if not FReaders.ContainsKey(Ext) then
   begin
-    Log(TLogTemplates.ExtNotFound, [Ext]);
+    Log.Warn(TLogTemplates.ExtNotFound, [Ext], TagMain);
     Exit;
   end;
 
@@ -78,9 +69,11 @@ procedure TLookBookEngine.ScanDirectory(const ADirectoryName: string);
 var
   Files: TArray<string>;
 begin
-  Log(TLogTemplates.ScanningStarted, [ADirectoryName]);
+  FPublicationInfoConsumer.BeginUpdateCollection(ADirectoryName);
 
-  Files := TDirectory.GetFiles(ADirectoryName);
+  Log.Info(TLogTemplates.ScanningStarted, [ADirectoryName], TagMain);
+
+  Files := TDirectory.GetFiles(ADirectoryName, '*.*', TSearchOption.soAllDirectories);
   for var I := Low(Files) to High(Files) do
     ProcessBook(Files[I]);
     //Log(TLogTemplates.FileName, [TPath.GetFileName(Files[I])]);

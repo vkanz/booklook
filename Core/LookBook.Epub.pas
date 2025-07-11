@@ -43,10 +43,8 @@ type
   private
     FZipFile: TZipFile;
     FValues: TStrings;
-    procedure Log(const AFormat: string; const AArgs: array of const);
-    function GetTargetDirectory: string;
     function ExtractContent(const AFileName: string; out AContentFileName: string): Boolean;
-    procedure ReadPublicationInformation(const AFileName: string);
+    function ReadPublicationInformation(const AFileName: string): TPublicationInfo;
   public
     {IBookReader}
     function Inspect(const AFileName: string): Boolean;
@@ -60,7 +58,11 @@ implementation
 uses
   IOUtils, SysUtils,
   Xml.XMLDoc, Xml.XMLIntf, Xml.omnixmldom,
+  LookBook.Logger,
   LookBook.Consts;
+
+const
+  LogTag = TagMain; //'epub';
 
 { TEpubReader }
 
@@ -85,10 +87,11 @@ var
 begin
   AContentFileName := string.Empty;
 
-  //Place to unzip
+  //Unzip to TempDir
   TempDir := TPath.Combine(TPath.GetTempPath, AppID);
-  if not TDirectory.Exists(TempDir) then
-    TDirectory.CreateDirectory(TempDir);
+  if TDirectory.Exists(TempDir) then
+    TDirectory.Delete(TempDir, True);
+  TDirectory.CreateDirectory(TempDir);
   UnzipFileName := TPath.Combine(TempDir, ContentFileName);
   if TFile.Exists(UnzipFileName) then
     TFile.Delete(UnzipFileName);
@@ -108,57 +111,43 @@ begin
 
     Result := AContentFileName <> string.Empty;
     if not Result then
-      Log(TLogTemplates.FileNotFound, [ContentFileName]);
+      Log.Error(TLogTemplates.FileNotFound, [ContentFileName], LogTag);
 
   finally
     FZipFile.Close;
   end;
 end;
 
-function TEpubReader.GetTargetDirectory: string;
-begin
-  Result := TPath.Combine(TPath.GetTempPath, AppID);
-  if TDirectory.Exists(Result) then
-  begin
-    //Clear directory
-    TDirectory.Delete(Result, True);
-    TDirectory.CreateDirectory(Result);
-  end
-  else
-    TDirectory.CreateDirectory(Result);
-end;
-
 function TEpubReader.Inspect(const AFileName: string): Boolean;
 var
   UnzipFileName: string;
+  PublicationInfo: TPublicationInfo;
 begin
-  Log(TLogTemplates.Book, [TPath.GetFileNameWithoutExtension(AFileName)]);
+  Log.Info(TLogTemplates.Book, [TPath.GetFileNameWithoutExtension(AFileName)], LogTag);
 
   Result := ExtractContent(AFileName, UnzipFileName);
   if Result then
-    ReadPublicationInformation(UnzipFileName)
+  begin
+    PublicationInfo := ReadPublicationInformation(UnzipFileName);
+    Log.Info('Info: ' + PublicationInfo.ToJSON, LogTag);
+    Assert(Assigned(FPublicationInfoConsumer));
+    FPublicationInfoConsumer.AddPublicationInfo(AFileName, PublicationInfo);
+  end
   else
-    Log(TLogTemplates.FileNotFound, [ContentFileName]);
+    Log.Error(TLogTemplates.FileNotFound, [ContentFileName], LogTag);
 end;
 
-procedure TEpubReader.Log(const AFormat: string; const AArgs: array of const);
-begin
-  Assert(Assigned(FLogger), 'Logger is not assigned');
-  FLogger.Log(Format(AFormat, AArgs));
-end;
-
-procedure TEpubReader.ReadPublicationInformation(const AFileName: string);
+function TEpubReader.ReadPublicationInformation(const AFileName: string): TPublicationInfo;
 var
   XmlDoc: IXMLDocument;
   NodePackage,
-  NodeMeta,
-  NodeTitle: IXMLNode;
+  NodeMeta: IXMLNode;
   NameSpaceURI,
   NameSpaceDC: string;
 begin
   if not FileExists(AFileName) then
   begin
-    Log(TLogTemplates.FileNotFound, [AFileName]);
+    Log.Error(TLogTemplates.FileNotFound, [AFileName], LogTag);
     Exit;
   end;
 
@@ -171,7 +160,7 @@ begin
     NodePackage := XmlDoc.ChildNodes.FindNode(TEpubContent.Package);
     if NodePackage = nil then
     begin
-      Log(TLogTemplates.NodeNotFound, [TEpubContent.Package]);
+      Log.Error(TLogTemplates.NodeNotFound, [TEpubContent.Package], LogTag);
       Exit;
     end;
     if NodePackage.HasAttribute('xmlns') then
@@ -183,7 +172,7 @@ begin
     NodeMeta := NodePackage.ChildNodes.FindNode(TEpubContent.Metadata);
     if NodeMeta = nil then
     begin
-      Log(TLogTemplates.NodeNotFound, [TEpubContent.Metadata]);
+      Log.Info(TLogTemplates.NodeNotFound, [TEpubContent.Metadata], LogTag);
       Exit;
     end;
     if NodeMeta.HasAttribute(TEpubContent.DC, NameSpaceURI) then
@@ -198,18 +187,14 @@ begin
       var TheNode: IXMLNode := NodeMeta.ChildNodes.FindNode(Terms[I], NameSpaceDC);
       var NodeValue: string := string.Empty;
       if Assigned(TheNode) then
-      begin
-        NodeValue := TheNode.NodeValue;
-        Log(TLogTemplates.Debug, [Terms[I] + '=' + NodeValue]);
-      end;
-      FValues.Add(NodeValue);
+        FValues.Add(TheNode.NodeValue)
+      else
+        FValues.Add(string.Empty);
     end;
 
-    Assert(Assigned(FPublicationInfoConsumer));
-    FPublicationInfoConsumer.AddPublicationInfo(AFileName, TPublicationInfo.FromStrings(FValues));
-
+    Result.AssignStrings(FValues);
   except
-    Log(TLogTemplates.BadXml, [TPath.GetFileName(AFileName)]);
+    Log.Error(TLogTemplates.BadXml, [TPath.GetFileName(AFileName)], LogTag);
   end;
 end;
 

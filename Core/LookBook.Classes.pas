@@ -30,10 +30,9 @@ type
 type
   TBookReader = class(TInterfacedObject)
   protected
-    FLogger: ILogger;
     FPublicationInfoConsumer: IPublicationInfoConsumer;
   public
-    constructor Create(ALogger: ILogger; APublicationInfoConsumer: IPublicationInfoConsumer);
+    constructor Create(APublicationInfoConsumer: IPublicationInfoConsumer);
     destructor Destroy; override;
   end;
 
@@ -56,15 +55,14 @@ end;
 
 { TBookReader }
 
-constructor TBookReader.Create(ALogger: ILogger; APublicationInfoConsumer: IPublicationInfoConsumer);
+constructor TBookReader.Create(APublicationInfoConsumer: IPublicationInfoConsumer);
 begin
-  FLogger := ALogger;
   FPublicationInfoConsumer := APublicationInfoConsumer;
 end;
 
 destructor TBookReader.Destroy;
 begin
-  FLogger := nil;
+
   inherited Destroy;
 end;
 

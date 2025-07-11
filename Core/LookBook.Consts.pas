@@ -17,6 +17,10 @@ type
     NodeNotFound = 'Error: node "%s" not found';
     Title = 'Title: "%s"';
     Debug = 'Debug: "%s"';
+    DatabaseOpen = 'Database "%s" open';
+    CollectionCreated = 'Collection "%s" created';
+    TablesCreated = 'Tables created';
+    CurrentCollection = 'Current collection: %d';
   end;
 
 implementation

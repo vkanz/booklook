@@ -10,7 +10,8 @@ uses
   LookBook.Consts in 'Core\LookBook.Consts.pas',
   LookBook.Data in 'Data\LookBook.Data.pas' {Database: TDataModule},
   LookBook.Options in 'Core\LookBook.Options.pas',
-  LookBook.Common in 'LookBook.Common.pas';
+  LookBook.Common in 'LookBook.Common.pas',
+  LookBook.Logger in 'Core\LookBook.Logger.pas';
 
 {$R *.res}
 
@@ -18,6 +19,5 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm14, Form14);
-  Application.CreateForm(TDatabase, Database);
   Application.Run;
 end.
