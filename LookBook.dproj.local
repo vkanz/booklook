@@ -1,36 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899.12.30 00:00:00.000.063,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.863,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.941,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.654,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\EpubEngine.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.049,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\LookBook.Options.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.475,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.123,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.974,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.831,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.418,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.123,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.654,D:\_Projects2\EpubReader\Core\EpubEngine.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.513,D:\_Projects2\EpubReader\EpubReader.dproj=D:\_Projects2\_tmp\Project13.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.469,E:\DelphiProjects\booklook\Unit1.pas=E:\DelphiProjects\booklook\Core\LookBook.Logger.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.333,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\BookReader.Classes.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.830,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\BookReader.Epub.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.266,D:\_Projects2\EpubReader\Core\LookBook.Classes.pas=D:\_Projects2\EpubReader\Core\BookReader.Classes.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.579,D:\_Projects2\EpubReader\Core\EpubEngine.pas=D:\_Projects2\EpubReader\Core\BookReader.Engine.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.209,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\LookBook.Common.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.141,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\BookReader.Consts.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.105,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Core\BookReader.Interfaces.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.064,D:\_Projects2\EpubReader\Unit1.pas=D:\_Projects2\EpubReader\Data\LookBook.Data.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.941,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.012,D:\_Projects2\EpubReader\LookBook.dproj=D:\_Projects2\EpubReader\EpubReader.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.569,D:\_Projects2\EpubReader\Core\LookBook.Interfaces.pas=D:\_Projects2\EpubReader\Core\BookReader.Interfaces.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.954,D:\_Projects2\EpubReader\Core\LookBook.Engine.pas=D:\_Projects2\EpubReader\Core\BookReader.Engine.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.469,E:\DelphiProjects\booklook\Core\LookBook.Logger.pas=E:\DelphiProjects\booklook\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.210,D:\_Projects2\EpubReader\Core\LookBook.Epub.pas=D:\_Projects2\EpubReader\Core\BookReader.Epub.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.146,D:\_Projects2\EpubReader\Core\LookBook.Consts.pas=D:\_Projects2\EpubReader\Core\BookReader.Consts.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.076,D:\_Projects2\_tmp\Unit14.dfm=D:\_Projects2\EpubReader\TestForm.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.513,D:\_Projects2\_tmp\Project13.dproj=D:\_Projects2\EpubReader\EpubReader.dproj</Transaction>
     <Transaction>1899.12.30 00:00:00.000.310,=E:\DelphiProjects\booklook\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.012,D:\_Projects2\EpubReader\EpubReader.dproj=D:\_Projects2\EpubReader\LookBook.dproj</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.049,D:\_Projects2\EpubReader\Core\LookBook.Options.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.579,D:\_Projects2\EpubReader\Core\BookReader.Engine.pas=D:\_Projects2\EpubReader\Core\EpubEngine.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.954,D:\_Projects2\EpubReader\Core\BookReader.Engine.pas=D:\_Projects2\EpubReader\Core\LookBook.Engine.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.475,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.076,D:\_Projects2\EpubReader\TestForm.pas=D:\_Projects2\_tmp\Unit14.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.266,D:\_Projects2\EpubReader\Core\BookReader.Classes.pas=D:\_Projects2\EpubReader\Core\LookBook.Classes.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.333,D:\_Projects2\EpubReader\Core\BookReader.Classes.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.146,D:\_Projects2\EpubReader\Core\BookReader.Consts.pas=D:\_Projects2\EpubReader\Core\LookBook.Consts.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.076,D:\_Projects2\EpubReader\TestForm.dfm=D:\_Projects2\_tmp\Unit14.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.064,D:\_Projects2\EpubReader\Data\LookBook.Data.dfm=D:\_Projects2\EpubReader\Unit1.dfm</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.141,D:\_Projects2\EpubReader\Core\BookReader.Consts.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.105,D:\_Projects2\EpubReader\Core\BookReader.Interfaces.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.210,D:\_Projects2\EpubReader\Core\BookReader.Epub.pas=D:\_Projects2\EpubReader\Core\LookBook.Epub.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.064,D:\_Projects2\EpubReader\Data\LookBook.Data.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.209,D:\_Projects2\EpubReader\LookBook.Common.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.830,D:\_Projects2\EpubReader\Core\BookReader.Epub.pas=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.569,D:\_Projects2\EpubReader\Core\BookReader.Interfaces.pas=D:\_Projects2\EpubReader\Core\LookBook.Interfaces.pas</Transaction>
-    <Transaction>1899.12.30 00:00:00.000.053,=D:\_Projects2\_tmp\Unit14.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.063,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.863,=D:\_Projects2\EpubReader\Unit1.pas</Transaction>
     <Transaction>1899.12.30 00:00:00.000.956,=D:\_Projects2\_tmp\Unit14.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.064,D:\_Projects2\EpubReader\Unit1.dfm=D:\_Projects2\EpubReader\Data\LookBook.Data.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.076,D:\_Projects2\_tmp\Unit14.pas=D:\_Projects2\EpubReader\TestForm.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.053,=D:\_Projects2\_tmp\Unit14.pas</Transaction>
   </Transactions>
 </BorlandProject>

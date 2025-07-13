@@ -20,13 +20,13 @@ var
   LookBookCenter: TLookBookCenter;
 begin
   try
+    LookBookCenter := TLookBookCenter.Create;
     try
-      LookBookCenter := TLookBookCenter.Create;
 
-    var FileName: string := TPath.GetFullPath(
-      TPath.Combine(
-        TPath.GetDirectoryName(ParamStr(0)),
-        '..\..\Test\'));
+      var FileName: string := TPath.GetFullPath(
+        TPath.Combine(
+          TPath.GetDirectoryName(ParamStr(0)),
+          '..\..\Test\'));
 
       LookBookCenter.ScanDirectory(FileName);
 

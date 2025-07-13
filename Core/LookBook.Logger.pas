@@ -19,9 +19,18 @@ uses
   LoggerPro.ConsoleAppender,
   LoggerPro.OutputDebugStringAppender;
 
+{$DEFINE DMVC342}
+
 type
   TLookBookConsoleAppender = class(TLoggerProConsoleAppender)
-    constructor Create;
+    constructor Create; override;
+  end;
+
+type
+  TLogItemRenderer = class(TInterfacedObject, ILogItemRenderer)
+    procedure Setup;
+    procedure TearDown;
+    function RenderLogItem(const aLogItem: TLogItem): String;
   end;
 
 { TLookBookConsoleAppender }
@@ -43,6 +52,25 @@ begin
     end;
 end;
 
+{ TLogItemRenderer }
+
+function TLogItemRenderer.RenderLogItem(const aLogItem: TLogItem): String;
+begin
+  Result := TimeToStr(aLogItem.TimeStamp) + #9 +
+    aLogItem.LogTypeAsString + #9 +
+    aLogItem.LogMessage;
+end;
+
+procedure TLogItemRenderer.Setup;
+begin
+
+end;
+
+procedure TLogItemRenderer.TearDown;
+begin
+
+end;
+
 initialization
   Log := BuildLogWriter([
     TLoggerProFileAppender.Create(
@@ -50,7 +78,11 @@ initialization
       TLoggerProFileAppenderBase.DEFAULT_MAX_FILE_SIZE_KB,
       '',
       TLoggerProFileAppenderBase.DEFAULT_FILENAME_FORMAT,
+{$IFDEF DMVC342}
+      TLogItemRenderer.Create(),
+{$ELSE}
       TLogLayout.LOG_LAYOUT_3,
+{$ENDIF}
       TEncoding.UTF8)
     //,TLoggerProOutputDebugStringAppender.Create
       ,TLookBookConsoleAppender.Create()
